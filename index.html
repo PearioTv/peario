@@ -858,11 +858,11 @@
       z-index: -1;
     }
     
-    .s-btn svg, .s-btn span { 
+    .s-btn svg { 
       width:22px; 
       height:22px; 
       flex-shrink:0;
-      font-size: 20px;
+      transition: transform 0.3s ease;
     }
     
     .s-btn:hover { 
@@ -874,6 +874,47 @@
     
     .s-btn:hover::before {
       opacity: 1;
+    }
+
+    .s-btn:hover svg {
+      transform: scale(1.1) rotate(-5deg);
+    }
+
+    /* ── SOCIAL BRAND COLORS ── */
+    /* Facebook */
+    .s-facebook:hover {
+      background: #1877F2 !important;
+      border-color: #1877F2 !important;
+      color: white !important;
+      box-shadow: 0 10px 30px rgba(24, 119, 242, 0.3) !important;
+    }
+    
+    .s-facebook:hover::before {
+      opacity: 0 !important;
+    }
+
+    /* Instagram */
+    .s-instagram:hover {
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%) !important;
+      border-color: transparent !important;
+      color: white !important;
+      box-shadow: 0 10px 30px rgba(225, 48, 108, 0.3) !important;
+    }
+    
+    .s-instagram:hover::before {
+      opacity: 0 !important;
+    }
+
+    /* Telegram */
+    .s-telegram:hover {
+      background: #0088cc !important;
+      border-color: #0088cc !important;
+      color: white !important;
+      box-shadow: 0 10px 30px rgba(0, 136, 204, 0.3) !important;
+    }
+    
+    .s-telegram:hover::before {
+      opacity: 0 !important;
     }
 
     /* ── FOOTER ── */
@@ -963,6 +1004,7 @@
       transition: all 0.3s ease;
       z-index: 1000;
       font-size: 20px;
+      color: var(--white);
     }
 
     .scroll-top.visible {
@@ -974,6 +1016,37 @@
       background: var(--accent);
       border-color: var(--accent);
       transform: translateY(-5px);
+      color: white;
+    }
+
+    /* ── PAGE LOADER ── */
+    .page-loader {
+      position: fixed;
+      inset: 0;
+      background: var(--black);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s, visibility 0.5s;
+    }
+
+    .page-loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-spinner {
+      width: 60px;
+      height: 60px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
 
     /* ── RESPONSIVE ── */
@@ -1026,36 +1099,6 @@
       .social-row{flex-direction:column;align-items:center;}
       .s-btn{width:100%; max-width:280px; justify-content:center;}
       .dl-features{flex-direction:column; gap:20px;}
-    }
-
-    /* Loading animation */
-    .page-loader {
-      position: fixed;
-      inset: 0;
-      background: var(--black);
-      z-index: 10000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.5s, visibility 0.5s;
-    }
-
-    .page-loader.hidden {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .loader-spinner {
-      width: 60px;
-      height: 60px;
-      border: 3px solid var(--border);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
     }
   </style>
 </head>
@@ -1230,14 +1273,25 @@
   <p class="social-s">تابع آخر الأخبار والتحديثات والمحتوى الحصري</p>
   
   <div class="social-row">
-    <a href="https://www.facebook.com/pearioapp/" class="s-btn" target="_blank">
-      <span>📘</span> فيسبوك
+    <a href="https://www.facebook.com/pearioapp/" class="s-btn s-facebook" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+      </svg>
+      فيسبوك
     </a>
-    <a href="https://www.instagram.com/pearioapp" class="s-btn" target="_blank">
-      <span>📷</span> إنستجرام
+    
+    <a href="https://www.instagram.com/pearioapp" class="s-btn s-instagram" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+      </svg>
+      إنستجرام
     </a>
-    <a href="https://t.me/pearioapp" class="s-btn" target="_blank">
-      <span>✈️</span> تلجرام
+    
+    <a href="https://t.me/pearioapp" class="s-btn s-telegram" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+      </svg>
+      تلجرام
     </a>
   </div>
 </section>
@@ -1252,7 +1306,7 @@
   </div>
   <div class="footer-copy">© 2026 Peario. جميع الحقوق محفوظة.</div>
   <div class="footer-contact">
-    للتواصل: <a href="mailto:peariopub@gmail.com">peariopub@gmail.com</a>
+    للتواصل: <a href="mailto:support@peario.app">support@peario.app</a>
   </div>
 </footer>
 
